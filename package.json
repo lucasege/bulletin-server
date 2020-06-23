@@ -2,8 +2,6 @@
   "dependencies": {
     "config": "^3.3.1",
     "express": "^4.17.1",
-    "mongodb": "^3.5.9",
-    "mongoose": "^5.9.19",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   },
