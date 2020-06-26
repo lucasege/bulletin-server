@@ -1,15 +1,18 @@
-import { Schema } from "mongoose";
+import { Schema, Types } from "mongoose";
 import { findAll } from "./posts.statics";
-import { setLastUpdated } from "./posts.methods";
+import { setModified } from "./posts.methods";
 
 const PostSchema = new Schema({
   title: String,
-  content: String,
-  dateOfEntry: {
+  body: String,
+  authorFirstName: String,
+  authorLastName: String,
+  authorId: Types.ObjectId,
+  created: {
     type: Date,
     default: new Date()
   },
-  lastUpdated: {
+  modified: {
     type: Date,
     default: new Date()
   }
@@ -17,6 +20,6 @@ const PostSchema = new Schema({
 
 PostSchema.statics.findAll = findAll;
 
-PostSchema.methods.setLastUpdated = setLastUpdated;
+PostSchema.methods.setModified = setModified;
 
 export default PostSchema;

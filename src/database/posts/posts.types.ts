@@ -1,14 +1,18 @@
-import { Model, Document } from "mongoose";
+import { Model, Document, Types } from "mongoose";
 
 export interface IPost extends Document {
+  _id: Types.ObjectId;
   title: string;
-  content: string;
-  dateOfEntry?: Date;
-  lastUpdated?: Date;
+  body: string;
+  authorFirstName: string;
+  authorLastName: string;
+  authorId: Types.ObjectId; // Foreign key to Users collection
+  created?: Date;
+  modified?: Date;
 };
 
 export interface IPostDocument extends IPost {
-  setLastUpdated: (this: IPostDocument) => Promise<void>;
+  setModified: (this: IPostDocument) => Promise<void>;
 };
 
 export interface IPostModel extends Model<IPostDocument> {

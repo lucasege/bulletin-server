@@ -1,10 +1,10 @@
 import { IPostDocument } from "./posts.types";
 
-export async function setLastUpdated(this: IPostDocument):
+export async function setModified(this: IPostDocument):
   Promise<void> {
   const now = new Date();
-  if (!this.lastUpdated || this.lastUpdated < now) {
-    this.lastUpdated = now;
+  if (!this.modified || this.modified < now) {
+    this.modified = now;
     await this.save();
   }
 };
