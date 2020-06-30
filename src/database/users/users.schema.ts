@@ -7,7 +7,7 @@ const UserSchema = new Schema({
   lastName: String,
   email: String,
   nonce: String,
-  appleUserString: String,
+  appleUserString: String, // Unique ID?
   appleAuthorizationCode: String,
   dateOfEntry: {
     type: Date,

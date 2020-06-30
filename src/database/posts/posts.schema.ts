@@ -7,6 +7,8 @@ const PostSchema = new Schema({
   body: String,
   authorFirstName: String,
   authorLastName: String,
+  latitude: Number,
+  longitude: Number,
   authorId: Types.ObjectId,
   created: {
     type: Date,

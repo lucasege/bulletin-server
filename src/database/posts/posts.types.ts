@@ -6,6 +6,8 @@ export interface IPost extends Document {
   body: string;
   authorFirstName: string;
   authorLastName: string;
+  latitude: number;
+  longitude: number;
   authorId: Types.ObjectId; // Foreign key to Users collection
   created?: Date;
   modified?: Date;

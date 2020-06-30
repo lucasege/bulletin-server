@@ -3,6 +3,8 @@ import { connect } from "./database/database";
 import { PostModel } from "./database/posts/posts.model";
 import { UserModel } from "./database/users/users.model";
 
+// TODO(lucas): enforce types
+
 const app = express();
 app.use(express.json());
 app.get('/getPosts', async (req, res) => {
