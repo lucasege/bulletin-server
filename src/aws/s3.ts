@@ -12,11 +12,13 @@ export const UploadImageToS3 = (imageContent: any) => {
     Key: keyPrefix + uuid.v4(),
     Body: imageContent
   };
+  let locator = "";
   s3.upload(params, function(err: any, data: any) {
     if (err) {
       throw err;
     }
     console.log(`File uploaded successfully. ${data.Location}`)
-    return data.Location;
+    locator = data.Location;
+    return locator;
   });
 }

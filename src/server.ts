@@ -40,14 +40,13 @@ app.post('/submitImage', (req, res) => {
   try {
     console.log("req.body ", req.body.imageSource)
     const locator = UploadImageToS3(req.body.imageSource);
-    fs.writeFile('./out.png', req.body.imageSource, 'base64', (err) => {
-      if (err) throw err
-    });
+    console.log("Locator ", locator)
     res.json({
       success: true,
       locator: locator,
     });
   } catch (err) {
+    console.log(err)
     res.status(404).json({
       success: false
     });
