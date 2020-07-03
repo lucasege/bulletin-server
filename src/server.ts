@@ -37,7 +37,7 @@ app.post('/submitUser', (req, res) => {
 });
 
 app.post('/submitImage', async (req, res) => {
-  UploadImageToS3(req.body.imageSource)
+  UploadImageToS3(req.body)
     .then((response) => {
       res.json({
         success: true,
