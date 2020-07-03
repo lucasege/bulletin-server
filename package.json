@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "aws-sdk": "^2.709.0",
     "config": "^3.3.1",
     "express": "^4.17.1",
     "mongoose": "^5.9.20",
+    "node-uuid": "^1.4.8",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   },
@@ -21,6 +23,7 @@
     "@types/express": "^4.17.6",
     "@types/mongoose": "^5.7.27",
     "@types/node": "^14.0.13",
+    "@types/node-uuid": "^0.0.28",
     "nodemon": "^2.0.4"
   }
 }
