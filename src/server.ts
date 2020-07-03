@@ -36,21 +36,20 @@ app.post('/submitUser', (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });
 
-app.post('/submitImage', (req, res) => {
-  try {
-    console.log("req.body ", req.body.imageSource)
-    const locator = UploadImageToS3(req.body.imageSource);
-    console.log("Locator ", locator)
-    res.json({
-      success: true,
-      locator: locator,
-    });
-  } catch (err) {
-    console.log(err)
-    res.status(404).json({
-      success: false
-    });
-  }
+app.post('/submitImage', async (req, res) => {
+  UploadImageToS3(req.body.imageSource)
+    .then((response) => {
+      res.json({
+        success: true,
+        locator: response.Location,
+      });
+    })
+    .catch((err) => {
+      console.error(err)
+      res.status(404).json({
+        success: false
+      });
+    })
 });
 
 const port = 5002;
