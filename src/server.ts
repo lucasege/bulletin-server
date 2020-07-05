@@ -17,6 +17,17 @@ app.get('/getPosts', async (req, res) => {
     .then(items => res.json(items))
 });
 
+app.get('/getDrafts/:userId', async (req, res) => {
+  PostModel.find({
+    authorId: req.params.userId,
+    published: false,
+  })
+    .then(items => res.json(items))
+    .catch((error) => {
+      console.error("Get Drafts error", error);
+    });
+})
+
 app.get('/getUser/:appleUserString', async (req, res) => {
   UserModel.findUser(req.params.appleUserString)
     .then(user => res.json(user))
