@@ -23,7 +23,7 @@ app.get('/getUser/:appleUserString', async (req, res) => {
 });
 
 app.post('/submitPost', (req, res) => {
-  const filter = { _id: req.body.id };
+  const filter = { _id: req.body._id };
 
   console.log("submitPost post:", req.body);
   PostModel.findOneAndUpdate(filter, req.body, {
