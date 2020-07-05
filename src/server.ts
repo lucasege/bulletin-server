@@ -23,8 +23,13 @@ app.get('/getUser/:appleUserString', async (req, res) => {
 });
 
 app.post('/submitPost', (req, res) => {
+  const filter = { _id: req.body.id };
+
   console.log("submitPost post:", req.body);
-  PostModel.insertMany(req.body)
+  PostModel.findOneAndUpdate(filter, req.body, {
+    new: true,
+    upsert: true,
+  })
     .then(() => res.json({ success: true }))
     .catch(err => {
       console.error("submitPost Error:", err);
