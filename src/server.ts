@@ -23,7 +23,6 @@ app.get('/getPosts', async (req, res) => {
 app.get('/getDrafts/:userId', async (req, res) => {
   PostModel.find({
     authorId: req.params.userId,
-    published: false,
   })
     .then(items => res.json(items))
     .catch((error) => {
