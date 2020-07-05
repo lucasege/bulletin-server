@@ -23,20 +23,27 @@ app.get('/getUser/:appleUserString', async (req, res) => {
 });
 
 app.post('/submitPost', (req, res) => {
-  console.log(req.body);
+  console.log("submitPost post:", req.body);
   PostModel.insertMany(req.body)
     .then(() => res.json({ success: true }))
-    .catch(err => res.status(404).json({ success: false }));
+    .catch(err => {
+      console.error("submitPost Error:", err);
+      res.status(404).json({ success: false });
+    });
 });
 
 app.post('/submitUser', (req, res) => {
-  console.log(req.body);
+  console.log("submitUser user:", req.body);
   UserModel.insertMany(req.body)
     .then(() => res.json({ success: true }))
-    .catch(err => res.status(404).json({ success: false }));
+    .catch(err => {
+      console.error("submitUser Error:", err);
+      res.status(404).json({ success: false });
+    });
 });
 
 app.post('/submitImage', async (req, res) => {
+  console.log("submitImage");
   UploadImageToS3(req.body)
     .then((response) => {
       res.json({
@@ -45,7 +52,7 @@ app.post('/submitImage', async (req, res) => {
       });
     })
     .catch((err) => {
-      console.error(err)
+      console.error("submitImage Error:", err);
       res.status(404).json({
         success: false
       });
