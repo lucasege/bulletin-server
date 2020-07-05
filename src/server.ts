@@ -12,8 +12,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ limit: '15MB' }))
 
+// TODO: organize endpoints by type, i.e. /posts/{get, set}. /users/{get, set}
 app.get('/getPosts', async (req, res) => {
-  PostModel.findAll()
+  PostModel.find({
+    published: true
+  })
     .then(items => res.json(items))
 });
 
