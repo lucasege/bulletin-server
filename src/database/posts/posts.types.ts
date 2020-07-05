@@ -1,14 +1,14 @@
 import { Model, Document, Types } from "mongoose";
 
 export interface IPost extends Document {
-  _id: Types.ObjectId;
-  title: string;
-  body: string;
-  authorFirstName: string;
-  authorLastName: string;
   latitude: number;
   longitude: number;
+  authorFirstName: string;
+  authorLastName: string;
   authorId: Types.ObjectId; // Foreign key to Users collection
+  published: boolean;
+  promptResponses: string[];
+  _id: Types.ObjectId;
   created?: Date;
   modified?: Date;
 };

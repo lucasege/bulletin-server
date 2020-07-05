@@ -18,15 +18,42 @@ import { connect, disconnect } from "../database/database";
     console.error(e);
   }
   const posts = [
-    { title: "The Times 03/Jan/2009", body: "Chancellor on brink of second bailout for banks", latitude: 37.78825, longitude: -122.4324, authorFirstName: author.firstName, authorLastName: author.lastName, authorId: author._id },
     {
-      title: "The big US stock indices are telling different stories", body: "The divergence in the performance of the major U.S. stock indexes this year is the widest in more than a decade.\nA surge in big technology stocks has helped the Nasdaq Composite rally 13% in 2020, while the Dow Jones Industrial Average of blue- chip stocks is down 8.3 %.The benchmark S & P 500 is hovering in between them, off 3.1 %.", latitude: 37.78820, longitude: -122.4230, authorFirstName: author.firstName, authorLastName: author.lastName, authorId: author._id
+      promptResponses: [
+        "The Times 03/Jan/2009",
+        "Chancellor on brink of second bailout for banks",
+        "",
+        "",
+        "",
+      ],
+      latitude: 37.78825,
+      longitude: -122.4324,
+      authorFirstName: author.firstName,
+      authorLastName: author.lastName,
+      authorId: author._id,
+      published: true,
+    },
+    {
+      promptResponses: [
+        "The big US stock indices are telling different stories",
+        "The divergence in the performance of the major U.S. stock indexes this year is the widest in more than a decade.",
+        "A surge in big technology stocks has helped the Nasdaq Composite rally 13% in 2020, while the Dow Jones Industrial Average of blue- chip stocks is down 8.3 %.The benchmark S & P 500 is hovering in between them, off 3.1 %.",
+        "",
+        "",
+      ],
+      latitude: 37.78820,
+      longitude: -122.4230,
+      authorFirstName: author.firstName,
+      authorLastName: author.lastName,
+      authorId: author._id,
+      published: true,
     }
   ];
   try {
     for (const post of posts) {
+      console.log("post ", post)
       await PostModel.create(post);
-      console.log(`Created user ${post.title} ${post.body}`);
+      console.log(`Created post ${post.promptResponses}`)
     }
     disconnect();
   } catch (e) {

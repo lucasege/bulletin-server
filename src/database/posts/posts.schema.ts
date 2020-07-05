@@ -3,13 +3,13 @@ import { findAll } from "./posts.statics";
 import { setModified } from "./posts.methods";
 
 const PostSchema = new Schema({
-  title: String,
-  body: String,
-  authorFirstName: String,
-  authorLastName: String,
+  promptResponses: [String],
   latitude: Number,
   longitude: Number,
+  authorFirstName: String,
+  authorLastName: String,
   authorId: Types.ObjectId,
+  published: Boolean,
   created: {
     type: Date,
     default: new Date()
