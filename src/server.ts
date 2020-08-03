@@ -3,12 +3,16 @@ import * as bodyParser from "body-parser";
 import { connect } from "./database/database";
 import { PostModel } from "./database/posts/posts.model";
 import { UserModel } from "./database/users/users.model";
+import { NotificationModel } from "./database/notifications/notifications.model";
 import { UploadImageToS3 } from "./aws/s3";
+import { initApn, sendNotification } from "./apn/apnprovider";
+var apn = require('apn');
 const fs = require('fs');
 
 // TODO(lucas): enforce types
 
 const app = express();
+initApn();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ limit: '15MB' }))
 
@@ -71,6 +75,47 @@ app.post('/submitImage', async (req, res) => {
     })
     .catch((err) => {
       console.error("submitImage Error:", err);
+      res.status(404).json({
+        success: false
+      });
+    })
+});
+
+app.post('/submitNotification', async (req, res) => {
+  const filter = { userId: req.body.userId, deviceId: req.body.deviceId };
+  NotificationModel.findOneAndUpdate(filter, req.body, {
+    new: true,
+    upsert: true,
+  })
+    .then(() => res.json({ success: true }))
+    .catch(err => {
+      console.error("submitNotification Error:", err);
+      res.status(404).json({ success: false });
+    });
+})
+
+app.post('/broadcastNotification', async (req, res) => {
+  NotificationModel.find({
+    userId: req.body.userId,
+  }).then(notificationData => {
+    const tokens: string[] = []
+    for (const notification of notificationData) {
+      tokens.push(notification.apnToken);
+    }
+    try {
+      sendNotification(tokens, req.body.alert, req.body.payload)
+      res.json({
+        success: true,
+      });
+    } catch (err) {
+      console.error("submitNotification Error:", err);
+      res.status(404).json({
+        success: false
+      });
+    }
+  })
+    .catch((err) => {
+      console.error("submitNotification Error:", err)
       res.status(404).json({
         success: false
       });

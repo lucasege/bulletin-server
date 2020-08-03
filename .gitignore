@@ -3,3 +3,5 @@ config/
 
 # node.js
 node_modules/
+
+certs/

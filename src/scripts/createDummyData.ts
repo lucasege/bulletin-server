@@ -1,6 +1,7 @@
 import { PostModel } from "../database/posts/posts.model";
 import { UserModel } from "../database/users/users.model";
 import { IUserDocument } from "../database/users/users.types";
+import { NotificationModel } from "../database/notifications/notifications.model";
 import { connect, disconnect } from "../database/database";
 
 (async () => {
@@ -55,8 +56,25 @@ import { connect, disconnect } from "../database/database";
       await PostModel.create(post);
       console.log(`Created post ${post.promptResponses}`)
     }
+  } catch (e) {
+    console.error(e);
+  }
+
+  const notificationData = [{
+    userId: author._id,
+    deviceId: "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F9",
+    apnToken: "e4c75d248658d4e93e1a9fdecbebf6548db9d4fcb6a8014027445404227d738a",
+  }
+  ];
+  try {
+    for (const notification of notificationData) {
+      console.log("notification", notification)
+      await NotificationModel.create(notification);
+      console.log(`Created notification ${notification.userId}, ${notification.deviceId}, ${notification.apnToken}`)
+    }
     disconnect();
   } catch (e) {
     console.error(e);
   }
+
 })();

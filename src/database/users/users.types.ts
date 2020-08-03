@@ -1,5 +1,6 @@
 import { Model, Document, Types } from "mongoose";
 
+// TODO add location storage
 export interface IUser extends Document {
   _id: Types.ObjectId;
   firstName: string;
