@@ -4,7 +4,7 @@ import { connect } from "./database/database";
 import { PostModel } from "./database/posts/posts.model";
 import { UserModel } from "./database/users/users.model";
 import { NotificationModel } from "./database/notifications/notifications.model";
-import { UploadImageToS3 } from "./aws/s3";
+import { UploadImageToS3, SignRoundupS3Request } from "./aws/s3";
 import { initApn, sendNotification } from "./apn/apnprovider";
 
 // TODO(lucas): enforce types
@@ -121,23 +121,22 @@ app.post('/broadcastNotification', async (req, res) => {
     })
 });
 
-app.post('/submitRoundup', async (req, res) => {
-  console.log("submitRoundup", "req", req);
-  // UploadRoundupToS3(req.body)
-  // UploadImageToS3(req.body)
-  //   .then((response) => {
-  //     res.json({
-  //       success: true,
-  //       locator: response.Location,
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     console.error("submitImage Error:", err);
-  //     res.status(404).json({
-  //       success: false
-  //     });
-  //   })
-});
+app.post('/signRoundupRequest', async (req, res) => {
+  console.log("Signing roundup request")
+  try {
+    const returnData = SignRoundupS3Request(req.body.fileName, req.body.fileType)
+    res.json({
+      data: returnData,
+      success: true,
+    });
+  } catch (err) {
+    console.error("Error signing roundup request:", err);
+    res.status(404).json({
+      success: false
+    })
+  }
+
+})
 
 const port = 5002;
 
