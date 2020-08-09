@@ -36,10 +36,11 @@ export const SignRoundupS3Request = (fileName: string, fileType: string, res: an
   // Make a request to the S3 API to get a signed URL which we can use to upload our file
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if (err) {
-      console.error("error e")
+      console.error("error:", err)
       res.status(404).json({
         success: false
       })
+      return;
     }
     // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved.
     console.log("Data", data)
