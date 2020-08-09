@@ -123,18 +123,7 @@ app.post('/broadcastNotification', async (req, res) => {
 
 app.post('/signRoundupRequest', async (req, res) => {
   console.log("Signing roundup request")
-  try {
-    const returnData = SignRoundupS3Request(req.body.fileName, req.body.fileType)
-    res.json({
-      data: returnData,
-      success: true,
-    });
-  } catch (err) {
-    console.error("Error signing roundup request:", err);
-    res.status(404).json({
-      success: false
-    })
-  }
+  await SignRoundupS3Request(req.body.fileName, req.body.fileType, res)
 
 })
 

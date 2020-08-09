@@ -21,20 +21,27 @@ export const UploadImageToS3 = async (imageResponse: any) => {
   return s3.upload(params).promise()
 }
 
-export const SignRoundupS3Request = async (fileName: string, fileType: string) => {
+export const SignRoundupS3Request = (fileName: string, fileType: string, res: any) => {
   // Set up the payload of what we are sending to the S3 api
   const s3Params = { Bucket: roundupBucket, Key: roundupKeyPrefix + fileName, Expires: 3000, ContentType: fileType, ACL: 'public-read' };
   // Make a request to the S3 API to get a signed URL which we can use to upload our file
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if (err) {
-      throw (err);
+      console.error("error e")
+      res.status(404).json({
+        success: false
+      })
     }
     // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved.
+    console.log("Data", data)
     const returnData = {
       signedRequest: data,
       url: `https://${roundupBucket}.s3.amazonaws.com/${roundupKeyPrefix + fileName}`
     };
-    return returnData;
+    res.json({
+      data: returnData,
+      success: true,
+    });
   });
 }
 
