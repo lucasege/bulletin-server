@@ -1,12 +1,13 @@
 var path = require('path');
 var apn = require('apn');
+const config = require('config')
 
 // configuring APN with credentials
 const apnOptions = {
   token: {
     key: path.join(__dirname, '..', 'certs', 'bulletin_apn_key.p8'),
-    keyId: "CX7G5XHV3W",
-    teamId: "W35YDS774K"
+    keyId: config.get('apnKeyId'),
+    teamId: config.get('apnTeamId')
   },
   production: false
 };

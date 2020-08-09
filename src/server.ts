@@ -80,6 +80,7 @@ app.post('/submitImage', async (req, res) => {
 });
 
 app.post('/submitNotification', async (req, res) => {
+  console.log("Submitting notification");
   const filter = { userId: req.body.userId, deviceId: req.body.deviceId };
   NotificationModel.findOneAndUpdate(filter, req.body, {
     new: true,
