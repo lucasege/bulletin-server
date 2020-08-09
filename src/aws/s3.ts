@@ -26,7 +26,13 @@ export const UploadImageToS3 = async (imageResponse: any) => {
 
 export const SignRoundupS3Request = (fileName: string, fileType: string, res: any) => {
   // Set up the payload of what we are sending to the S3 api
-  const s3Params = { Bucket: roundupBucket, Key: fileName, Expires: 3000 };
+  const s3Params = {
+    Bucket: roundupBucket,
+    Key: fileName,
+    Expires: 3000,
+    ContentType: fileType,
+    Acl: "public-read",
+  };
   // Make a request to the S3 API to get a signed URL which we can use to upload our file
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if (err) {
