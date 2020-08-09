@@ -6,8 +6,6 @@ import { UserModel } from "./database/users/users.model";
 import { NotificationModel } from "./database/notifications/notifications.model";
 import { UploadImageToS3 } from "./aws/s3";
 import { initApn, sendNotification } from "./apn/apnprovider";
-var apn = require('apn');
-const fs = require('fs');
 
 // TODO(lucas): enforce types
 
@@ -120,6 +118,24 @@ app.post('/broadcastNotification', async (req, res) => {
         success: false
       });
     })
+});
+
+app.post('/submitRoundup', async (req, res) => {
+  console.log("submitRoundup", "req", req);
+  // UploadRoundupToS3(req.body)
+  // UploadImageToS3(req.body)
+  //   .then((response) => {
+  //     res.json({
+  //       success: true,
+  //       locator: response.Location,
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.error("submitImage Error:", err);
+  //     res.status(404).json({
+  //       success: false
+  //     });
+  //   })
 });
 
 const port = 5002;
