@@ -1,7 +1,10 @@
 import * as AWS from 'aws-sdk';
 import * as uuid from 'node-uuid';
 
-const s3 = new AWS.S3();
+const s3 = new AWS.S3({
+  "signatureVersion": "v4",
+  "region": "us-east-1",
+});
 
 const imageBucket = 'bulletin-news-images';
 const imageKeyPrefix = 'user_image_upload_';
