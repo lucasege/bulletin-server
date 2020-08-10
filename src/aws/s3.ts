@@ -30,7 +30,6 @@ export const SignRoundupS3Request = (fileName: string, fileType: string, res: an
     Bucket: roundupBucket,
     Key: fileName,
     Expires: 3000,
-    ContentEncoding: 'base64',
     ContentType: fileType,
     ACL: "public-read",
   };
