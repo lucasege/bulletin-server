@@ -30,8 +30,9 @@ export const SignRoundupS3Request = (fileName: string, fileType: string, res: an
     Bucket: roundupBucket,
     Key: fileName,
     Expires: 3000,
+    ContentEncoding: 'base64',
     ContentType: fileType,
-    Acl: "public-read",
+    ACL: "public-read",
   };
   // Make a request to the S3 API to get a signed URL which we can use to upload our file
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
