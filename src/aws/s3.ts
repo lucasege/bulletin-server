@@ -54,13 +54,3 @@ export const SignRoundupS3Request = (fileName: string, fileType: string, res: an
     });
   });
 }
-
-// export const UploadRoundupToS3 = async (audioResponse: any) => {
-//   // TODO
-//   var params = {
-//     Bucket: roundupBucket,
-//     Key: roundupKeyPrefix + userName + locationName + date,
-//     Body: audioResponse,
-//   }
-
-// }

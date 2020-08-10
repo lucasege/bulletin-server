@@ -138,6 +138,16 @@ app.post('/submitRoundup', async (req, res) => {
 
 })
 
+app.get('/getRoundups/:locationId', async (req, res) => {
+  RoundupModel.find({
+    locationId: req.params.locationId,
+  })
+    .then(items => res.json(items))
+    .catch((error) => {
+      console.error("Get roundups error:", error);
+    });
+})
+
 const port = 5002;
 
 connect();
