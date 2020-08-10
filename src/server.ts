@@ -4,6 +4,7 @@ import { connect } from "./database/database";
 import { PostModel } from "./database/posts/posts.model";
 import { UserModel } from "./database/users/users.model";
 import { NotificationModel } from "./database/notifications/notifications.model";
+import { RoundupModel } from "./database/roundups/roundups.model";
 import { UploadImageToS3, SignRoundupS3Request } from "./aws/s3";
 import { initApn, sendNotification } from "./apn/apnprovider";
 
@@ -123,7 +124,17 @@ app.post('/broadcastNotification', async (req, res) => {
 
 app.post('/signRoundupRequest', async (req, res) => {
   console.log("Signing roundup request")
-  await SignRoundupS3Request(req.body.fileName, req.body.fileType, res)
+  SignRoundupS3Request(req.body.fileName, req.body.fileType, res)
+})
+
+app.post('/submitRoundup', async (req, res) => {
+  console.log("Submitting roundup");
+  RoundupModel.insertMany(req.body)
+    .then(() => res.json({ success: true }))
+    .catch(err => {
+      console.error("submitRoundup Error:", err);
+      res.status(404).json({ success: false });
+    });
 
 })
 

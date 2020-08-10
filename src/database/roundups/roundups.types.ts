@@ -4,6 +4,7 @@ export interface IRoundup extends Document {
   locationId: Types.ObjectId,
   name: string,
   creatorId: Types.ObjectId,
+  audioUrl: string,
   created?: Date;
   modified?: Date;
 };

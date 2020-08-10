@@ -5,6 +5,7 @@ const RoundupSchema = new Schema({
   locationId: Types.ObjectId,
   name: String,
   creatorId: Types.ObjectId,
+  audioUrl: String,
   created: {
     type: Date,
     default: new Date()

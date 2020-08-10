@@ -46,7 +46,7 @@ export const SignRoundupS3Request = (fileName: string, fileType: string, res: an
     console.log("Data", data)
     const returnData = {
       signedRequest: data,
-      url: `https://${roundupBucket}.s3.amazonaws.com/${roundupKeyPrefix + fileName}`
+      url: `https://${roundupBucket}.s3.us-east-2.amazonaws.com/${fileName}`
     };
     res.json({
       data: returnData,
