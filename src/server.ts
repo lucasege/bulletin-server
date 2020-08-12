@@ -4,6 +4,7 @@ import { connect } from "./database/database";
 import { PostModel } from "./database/posts/posts.model";
 import { UserModel } from "./database/users/users.model";
 import { NotificationModel } from "./database/notifications/notifications.model";
+import { LocationModel } from "./database/locations/locations.model";
 import { RoundupModel } from "./database/roundups/roundups.model";
 import { UploadImageToS3, SignRoundupS3Request } from "./aws/s3";
 import { initApn, sendNotification } from "./apn/apnprovider";
@@ -145,6 +146,15 @@ app.get('/getRoundups/:locationId', async (req, res) => {
     .then(items => res.json(items))
     .catch((error) => {
       console.error("Get roundups error:", error);
+    });
+})
+
+app.get('/getNearestLocation/:latitude/:longitude', async (req, res) => {
+  console.log("Getting nearest location", req.params.latitude, req.params.longitude);
+  LocationModel.findNearestNeighborhood(Number(req.params.latitude), Number(req.params.longitude))
+    .then(location => res.json(location))
+    .catch((error: any) => {
+      console.error("Get nearest roundup error:", error);
     });
 })
 

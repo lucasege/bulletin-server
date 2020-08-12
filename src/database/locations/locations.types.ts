@@ -13,4 +13,10 @@ export interface ILocationDocument extends ILocation {
   setModified: (this: ILocationDocument) => Promise<void>;
 };
 
-// TODO Statics "find nearest"
+export interface ILocationModel extends Model<ILocationDocument> {
+  findNearestNeighborhood(
+    this: ILocationModel,
+    latitude: number,
+    longitude: number,
+  ): Promise<ILocationDocument>;
+};

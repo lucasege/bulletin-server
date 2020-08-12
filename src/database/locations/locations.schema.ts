@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 import { setModified } from "./locations.methods";
+import { findNearestNeighborhood } from "./locations.statics";
 
 const LocationSchema = new Schema({
   centerLatitude: Number,
@@ -16,5 +17,7 @@ const LocationSchema = new Schema({
 });
 
 LocationSchema.methods.setModified = setModified;
+
+LocationSchema.statics.findNearestNeighborhood = findNearestNeighborhood;
 
 export default LocationSchema;
