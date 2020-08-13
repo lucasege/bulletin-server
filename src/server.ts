@@ -149,12 +149,20 @@ app.get('/getRoundups/:locationId', async (req, res) => {
     });
 })
 
+app.get('/getLocations', async (req, res) => {
+  LocationModel.find()
+    .then(locations => res.json(locations))
+    .catch((error: any) => {
+      console.error("Get locations error:", error);
+    });
+})
+
 app.get('/getNearestLocation/:latitude/:longitude', async (req, res) => {
   console.log("Getting nearest location", req.params.latitude, req.params.longitude);
   LocationModel.findNearestNeighborhood(Number(req.params.latitude), Number(req.params.longitude))
     .then(location => res.json(location))
     .catch((error: any) => {
-      console.error("Get nearest roundup error:", error);
+      console.error("Get nearest location error:", error);
     });
 })
 

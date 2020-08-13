@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, Types } from "mongoose";
 import { findUser } from "./users.statics";
 import { setLastUpdated } from "./users.methods";
 
@@ -6,6 +6,7 @@ const UserSchema = new Schema({
   firstName: String,
   lastName: String,
   email: String,
+  defaultLocation: Types.ObjectId,
   nonce: String,
   appleUserString: String, // Unique ID?
   appleAuthorizationCode: String,
