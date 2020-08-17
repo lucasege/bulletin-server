@@ -32,6 +32,49 @@ app.get('/getDrafts/:userId', async (req, res) => {
     .catch((error) => {
       console.error("Get Drafts error", error);
     });
+});
+
+const PROMPTS = [
+  {
+    header: "What's happening in your area?",
+    subHeader: "Let the people know",
+    examples: [
+      'Interesting people',
+      'Event or Location reviews',
+      'Hometown heroes',
+      'Sports recap',
+      'Breaking news',
+    ],
+    optional: false,
+  },
+  {
+    header: 'Important points people should know',
+    subHeader: "Let's get three ideas on it...",
+    examples: [],
+    optional: false,
+  },
+  {
+    header: "Let's dig a bit deeper",
+    subHeader: "Expand on what's interesting to you about this story.",
+    examples: [],
+    optional: false,
+  },
+  {
+    header: "Get someone's perspective",
+    subHeader: "Broaden the story with an interview",
+    examples: [],
+    optional: true,
+  },
+  {
+    header: 'Closing thought',
+    subHeader: 'The big takeaway or action people should feel.',
+    examples: [],
+    optional: false,
+  },
+]
+
+app.get('/getPrompts', async (req, res) => {
+  res.json(PROMPTS)
 })
 
 app.get('/getUser/:appleUserString', async (req, res) => {
