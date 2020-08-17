@@ -101,6 +101,7 @@ app.post('/submitUser', async (req, res) => {
   console.log("submitUser user:", req.body);
   try {
     const user = UserModel.create(req.body);
+    console.log("New user:", user);
     res.json({
       success: true,
       user: user,
