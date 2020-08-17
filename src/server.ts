@@ -97,14 +97,18 @@ app.post('/submitPost', (req, res) => {
     });
 });
 
-app.post('/submitUser', (req, res) => {
+app.post('/submitUser', async (req, res) => {
   console.log("submitUser user:", req.body);
-  UserModel.insertMany(req.body)
-    .then(() => res.json({ success: true }))
-    .catch(err => {
-      console.error("submitUser Error:", err);
-      res.status(404).json({ success: false });
-    });
+  try {
+    const user = UserModel.create(req.body);
+    res.json({
+      success: true,
+      user: user,
+    })
+  } catch (err) {
+    console.error("submitUser Error:", err);
+    res.status(404).json({ success: false });
+  }
 });
 
 app.post('/submitImage', async (req, res) => {
