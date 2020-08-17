@@ -104,7 +104,7 @@ app.post('/submitUser', async (req, res) => {
     console.log("New user:", user);
     res.json({
       success: true,
-      user: user,
+      userId: user._id,
     })
   } catch (err) {
     console.error("submitUser Error:", err);
