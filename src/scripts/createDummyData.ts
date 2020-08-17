@@ -21,6 +21,7 @@ import { connect, disconnect } from "../database/database";
   }
   const posts = [
     {
+      headline: "The Times 03/Jan/2009: Chancellor on brink of second bailout for banks",
       promptResponses: [
         "The Times 03/Jan/2009",
         "Chancellor on brink of second bailout for banks",
@@ -36,6 +37,7 @@ import { connect, disconnect } from "../database/database";
       published: true,
     },
     {
+      headline: "The big US stock indices are telling different stories.",
       promptResponses: [
         "The big US stock indices are telling different stories",
         "The divergence in the performance of the major U.S. stock indexes this year is the widest in more than a decade.",

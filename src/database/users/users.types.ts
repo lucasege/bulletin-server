@@ -6,7 +6,7 @@ export interface IUser extends Document {
   firstName: string;
   lastName: string;
   email: string;
-  defaultLocation: Types.ObjectId;
+  defaultLocation?: Types.ObjectId;
   nonce: string;
   appleUserString: string;
   appleAuthorizationCode: string;

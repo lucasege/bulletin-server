@@ -3,6 +3,7 @@ import { findAll } from "./posts.statics";
 import { setModified } from "./posts.methods";
 
 const PostSchema = new Schema({
+  headline: String,
   promptResponses: [String],
   latitude: Number,
   longitude: Number,

@@ -6,6 +6,7 @@ export interface IPost extends Document {
   authorFirstName: string;
   authorLastName: string;
   authorId: Types.ObjectId; // Foreign key to Users collection
+  headline: string;
   published: boolean;
   promptResponses: string[];
   _id: Types.ObjectId;
